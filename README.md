@@ -1,0 +1,2 @@
+# Playtest
+使用aidl传递surface来实现跨进程播放demo
