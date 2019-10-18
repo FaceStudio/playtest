@@ -4,6 +4,7 @@ package com.ott.playserver;
 // Declare any non-default types here with import statements
 
 import android.view.Surface;
+
 interface IPlayAidlInterface {
     /**
      * Demonstrates some basic types that you can use as parameters

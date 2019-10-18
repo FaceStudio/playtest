@@ -4,23 +4,21 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.SurfaceTexture;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Surface;
-import android.view.TextureView;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 
 import com.ott.playserver.IPlayAidlInterface;
 
-public class MainActivity extends AppCompatActivity implements TextureView.SurfaceTextureListener {
+public class MainActivity extends AppCompatActivity {
 
-    private TextureView textureView;
-    private Surface surface;
+    private SurfaceView surfaceView;
 
     private Button play_aidl,play_broadcast;
 
@@ -32,8 +30,27 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textureView = findViewById(R.id.texture);
-        textureView.setSurfaceTextureListener(this);//设置监听函数 重写4个方法
+        surfaceView = findViewById(R.id.surface_view);
+
+        final SurfaceHolder holder = surfaceView.getHolder();
+
+        holder.addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+
+            }
+        });
+
 
         Intent intent = new Intent();
         // 服务端AndroidManifest.xml文件该Service所配置的action
@@ -54,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
                     public void run() {
                         if (iPlayAidlInterface != null) {
                             try {   //此处传递真正的参数
-                                iPlayAidlInterface.play(surface);
+                                iPlayAidlInterface.play(holder.getSurface());
                             } catch (RemoteException e) {
                                 e.printStackTrace();
                             }
@@ -72,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
                     public void run() {
                         Intent mIntent = new Intent("com.inspur.play");
                         Bundle bundle = new Bundle();
-                        bundle.putParcelable("surface", surface);// 序列化
+                        bundle.putParcelable("surface", holder.getSurface());// 序列化
                         mIntent.putExtras(bundle);// 发送数据
                         //发送广播
                         sendBroadcast(mIntent);
@@ -97,25 +114,4 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         }
     }
 
-
-    @Override
-    public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int i, int i1) {
-        surface = new Surface(surfaceTexture);
-
-    }
-
-    @Override
-    public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture, int i, int i1) {
-
-    }
-
-    @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
-
-    }
-
-    @Override
-    public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
-        return false;
-    }
 }

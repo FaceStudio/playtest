@@ -16,7 +16,8 @@ public class PlayService extends Service {
 
     private MediaPlayer mMediaPlayer;
 
-    public PlayService() {}
+    public PlayService() {
+    }
 
     @Nullable
     @Override
