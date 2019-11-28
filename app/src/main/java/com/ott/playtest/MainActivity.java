@@ -43,21 +43,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
 
-                try {
-                    mMediaPlayer = new MediaPlayer();
-                    mMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("http://192.168.12.100:8080/icdn-srm/live.m3u8?folder=3"));
-                    mMediaPlayer.setSurface(holder.getSurface());
-                    mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp) {
-                            mMediaPlayer.start();
-                        }
-                    });
-                    mMediaPlayer.prepare();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    mMediaPlayer = new MediaPlayer();
+//                    mMediaPlayer.setDataSource(getApplicationContext(), Uri.parse(""));
+//                    mMediaPlayer.setSurface(holder.getSurface());
+//                    mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//                    mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                        @Override
+//                        public void onPrepared(MediaPlayer mp) {
+//                            mMediaPlayer.start();
+//                        }
+//                    });
+//                    mMediaPlayer.prepare();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
             }
 
