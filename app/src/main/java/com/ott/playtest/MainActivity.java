@@ -4,6 +4,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private IPlayAidlInterface iPlayAidlInterface;
 
+    private MediaPlayer mMediaPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,22 @@ public class MainActivity extends AppCompatActivity {
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
+
+                try {
+                    mMediaPlayer = new MediaPlayer();
+                    mMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("http://192.168.12.100:8080/icdn-srm/live.m3u8?folder=3"));
+                    mMediaPlayer.setSurface(holder.getSurface());
+                    mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mMediaPlayer.start();
+                        }
+                    });
+                    mMediaPlayer.prepare();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
 
