@@ -12,7 +12,7 @@ import android.view.Surface;
 
 public class PlayService extends Service {
 
-    String url_hls = "http://10.255.68.222:8090/icdn-srm/live.m3u8?st=GP19PnucHwp3egExRpeEAQ&e=1569576445&userid=test1111&folder=2&shifttime=0&channelid=cctv2-h&deviceid=&devicename=__Hi3798MV310&devicetype=0";
+    String url_hls = "https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4";
 
     private MediaPlayer mMediaPlayer;
 

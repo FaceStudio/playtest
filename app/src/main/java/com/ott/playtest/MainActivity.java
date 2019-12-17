@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     private IPlayAidlInterface iPlayAidlInterface;
 
-    private MediaPlayer mMediaPlayer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,22 +40,6 @@ public class MainActivity extends AppCompatActivity {
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-
-//                try {
-//                    mMediaPlayer = new MediaPlayer();
-//                    mMediaPlayer.setDataSource(getApplicationContext(), Uri.parse(""));
-//                    mMediaPlayer.setSurface(holder.getSurface());
-//                    mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//                    mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                        @Override
-//                        public void onPrepared(MediaPlayer mp) {
-//                            mMediaPlayer.start();
-//                        }
-//                    });
-//                    mMediaPlayer.prepare();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
 
             }
 
@@ -98,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-                }, 500); //延时1s执行
+                }, 500);
             }
         });
 
